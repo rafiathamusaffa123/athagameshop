@@ -1,0 +1,2331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATHA STORE - Top Up Game Premium</title>
+    <meta name="description" content="ATHA STORE - Platform top up game premium terbaik dengan harga termurah dan proses tercepat." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================
+                   CSS VARIABLES & RESET
+                ============================ */
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --dark2: #1a1a1a;
+            --dark3: #222222;
+            --dark4: #2a2a2a;
+            --orange: #FF6B00;
+            --orange-light: #FF8C00;
+            --orange-glow: #FF6B0080;
+            --gold: #FFD700;
+            --gold-glow: #FFD70060;
+            --white: #ffffff;
+            --gray: #888888;
+            --light-gray: #aaaaaa;
+            --border: #333333;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', sans-serif;
+            --navbar-height: 72px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            cursor: pointer;
+            font-family: var(--font);
+            border: none;
+            outline: none;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        ul {
+            list-style: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--orange);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        /* ============================
+                   LOADING SCREEN
+                ============================ */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            position: relative;
+        }
+
+        .loading-logo {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px var(--orange-glow);
+            animation: logoPulse 1.5s ease-in-out infinite;
+            position: relative;
+        }
+        .loading-logo small {
+            font-size: 14px;
+            font-weight: 400;
+            -webkit-text-fill-color: var(--gray);
+            display: block;
+            letter-spacing: 4px;
+            margin-top: 4px;
+        }
+
+        @keyframes logoPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Lightning bolts around logo */
+        .lightning-bolts {
+            position: absolute;
+            inset: -40px -60px;
+            pointer-events: none;
+            overflow: visible;
+        }
+        .lightning-bolts span {
+            position: absolute;
+            width: 3px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 4px;
+            box-shadow: 0 0 20px var(--gold-glow), 0 0 60px var(--gold-glow);
+            opacity: 0;
+            animation: lightningFlash 1.8s ease-in-out infinite;
+        }
+        .lightning-bolts span:nth-child(1) {
+            top: -10px;
+            left: 10%;
+            animation-delay: 0.2s;
+            height: 30px;
+        }
+        .lightning-bolts span:nth-child(2) {
+            top: -20px;
+            right: 15%;
+            animation-delay: 0.6s;
+            height: 50px;
+            transform: rotate(15deg);
+        }
+        .lightning-bolts span:nth-child(3) {
+            bottom: -10px;
+            left: 20%;
+            animation-delay: 1.0s;
+            height: 35px;
+            transform: rotate(-10deg);
+        }
+        .lightning-bolts span:nth-child(4) {
+            bottom: -15px;
+            right: 10%;
+            animation-delay: 1.4s;
+            height: 45px;
+            transform: rotate(8deg);
+        }
+        .lightning-bolts span:nth-child(5) {
+            top: 50%;
+            left: -30px;
+            animation-delay: 0.4s;
+            height: 25px;
+            transform: rotate(90deg);
+        }
+        .lightning-bolts span:nth-child(6) {
+            top: 50%;
+            right: -30px;
+            animation-delay: 0.8s;
+            height: 25px;
+            transform: rotate(90deg);
+        }
+
+        @keyframes lightningFlash {
+            0%,
+            90%,
+            100% {
+                opacity: 0;
+                transform: scaleY(0.5);
+            }
+            92% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+            94% {
+                opacity: 0.3;
+                transform: scaleY(0.8);
+            }
+            96% {
+                opacity: 1;
+                transform: scaleY(1.2);
+            }
+            98% {
+                opacity: 0;
+                transform: scaleY(0.6);
+            }
+        }
+
+        .loading-progress-wrap {
+            width: 280px;
+            height: 4px;
+            background: var(--dark3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .loading-progress-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--orange), var(--gold));
+            box-shadow: 0 0 30px var(--orange-glow);
+            transition: width 0.15s linear;
+        }
+        .loading-progress-text {
+            font-size: 12px;
+            color: var(--gray);
+            letter-spacing: 2px;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .loading-glow-ring {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--orange);
+            border-right-color: var(--gold);
+            animation: spinRing 2s linear infinite;
+            opacity: 0.3;
+            filter: blur(2px);
+        }
+        @keyframes spinRing {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================
+                   BACK TO TOP
+                ============================ */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            color: var(--black);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 24px var(--orange-glow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 40px var(--orange-glow);
+        }
+
+        /* ============================
+                   FLOATING WHATSAPP
+                ============================ */
+        #floating-wa {
+            position: fixed;
+            bottom: 28px;
+            right: 24px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            color: #fff;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 24px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            animation: waPulse 2s ease-in-out infinite;
+        }
+        #floating-wa:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 40px rgba(37, 211, 102, 0.6);
+        }
+        @keyframes waPulse {
+            0%,
+            100% {
+                box-shadow: 0 4px 24px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 48px rgba(37, 211, 102, 0.7);
+            }
+        }
+
+        /* ============================
+                   NAVBAR
+                ============================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--navbar-height);
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 0, 0.15);
+            transition: var(--transition);
+            padding: 0 24px;
+        }
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            border-bottom-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .navbar-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .nav-logo span {
+            font-size: 20px;
+            -webkit-text-fill-color: initial;
+            color: var(--gold);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-menu a {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--light-gray);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--white);
+            background: rgba(255, 107, 0, 0.12);
+        }
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--orange), var(--gold));
+            border-radius: 4px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-search {
+            display: flex;
+            align-items: center;
+            background: var(--dark2);
+            border-radius: 50px;
+            padding: 0 16px;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .nav-search:focus-within {
+            border-color: var(--orange);
+            box-shadow: 0 0 20px var(--orange-glow);
+        }
+        .nav-search input {
+            background: transparent;
+            border: none;
+            padding: 8px 0;
+            color: var(--white);
+            font-size: 13px;
+            width: 140px;
+            outline: none;
+            font-family: var(--font);
+        }
+        .nav-search input::placeholder {
+            color: var(--gray);
+        }
+        .nav-search button {
+            background: transparent;
+            color: var(--gray);
+            font-size: 16px;
+            padding: 4px 0 4px 8px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .nav-search button:hover {
+            color: var(--orange);
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--dark2);
+            color: var(--gold);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            border-color: var(--orange);
+            box-shadow: 0 0 20px var(--orange-glow);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: var(--navbar-height);
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 20px 24px 32px;
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+            flex-direction: column;
+            gap: 4px;
+            max-height: calc(100vh - var(--navbar-height));
+            overflow-y: auto;
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        .mobile-menu.open {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu a {
+            padding: 12px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--light-gray);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        .mobile-menu a:hover {
+            color: var(--white);
+            background: rgba(255, 107, 0, 0.1);
+        }
+
+        /* ============================
+                   HERO BANNER
+                ============================ */
+        .hero {
+            padding-top: var(--navbar-height);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255, 107, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                var(--black);
+        }
+
+        /* Lightning particles in hero */
+        .hero-lightning {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-lightning .bolt {
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 4px;
+            box-shadow: 0 0 30px var(--gold-glow);
+            opacity: 0;
+            animation: heroLightning 4s ease-in-out infinite;
+        }
+        .hero-lightning .bolt:nth-child(1) {
+            top: 15%;
+            left: 8%;
+            height: 80px;
+            animation-delay: 0.5s;
+        }
+        .hero-lightning .bolt:nth-child(2) {
+            top: 25%;
+            right: 12%;
+            height: 50px;
+            animation-delay: 1.8s;
+            transform: rotate(12deg);
+        }
+        .hero-lightning .bolt:nth-child(3) {
+            bottom: 30%;
+            left: 5%;
+            height: 70px;
+            animation-delay: 3.2s;
+            transform: rotate(-8deg);
+        }
+        .hero-lightning .bolt:nth-child(4) {
+            bottom: 20%;
+            right: 8%;
+            height: 55px;
+            animation-delay: 0.9s;
+            transform: rotate(5deg);
+        }
+        .hero-lightning .bolt:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            height: 40px;
+            animation-delay: 2.5s;
+            transform: rotate(90deg);
+        }
+
+        @keyframes heroLightning {
+            0%,
+            92%,
+            100% {
+                opacity: 0;
+                transform: scaleY(0.3);
+            }
+            94% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+            96% {
+                opacity: 0.4;
+                transform: scaleY(0.7);
+            }
+            98% {
+                opacity: 1;
+                transform: scaleY(1.2);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            width: 100%;
+        }
+
+        .hero-slider {
+            display: flex;
+            gap: 24px;
+            overflow: hidden;
+            position: relative;
+            border-radius: var(--radius);
+        }
+
+        .hero-slide {
+            flex: 0 0 100%;
+            padding: 48px 56px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.12), rgba(255, 215, 0, 0.06));
+            border: 1px solid rgba(255, 107, 0, 0.15);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            min-height: 320px;
+        }
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            padding: 1px;
+            background: linear-gradient(135deg, var(--orange), transparent, var(--gold));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .hero-slide-text {
+            flex: 1;
+            min-width: 200px;
+        }
+        .hero-slide-text .badge {
+            display: inline-block;
+            padding: 4px 16px;
+            background: rgba(255, 107, 0, 0.2);
+            border: 1px solid var(--orange);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .hero-slide-text h2 {
+            font-size: clamp(28px, 5vw, 52px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+        .hero-slide-text h2 span {
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-slide-text p {
+            color: var(--light-gray);
+            font-size: 16px;
+            margin-bottom: 20px;
+            max-width: 480px;
+        }
+        .hero-slide-text .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 12px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--orange), #e65c00);
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 24px var(--orange-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 40px var(--orange-glow);
+        }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .btn-primary:hover::after {
+            opacity: 1;
+        }
+
+        .btn-secondary {
+            padding: 12px 32px;
+            border-radius: 50px;
+            background: transparent;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .btn-secondary:hover {
+            border-color: var(--orange);
+            background: rgba(255, 107, 0, 0.08);
+            box-shadow: 0 0 30px var(--orange-glow);
+        }
+
+        .hero-slide-image {
+            flex: 0 0 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            opacity: 0.6;
+        }
+
+        .hero-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .hero-dots button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--dark3);
+            border: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .hero-dots button.active {
+            background: var(--orange);
+            box-shadow: 0 0 20px var(--orange-glow);
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        /* ============================
+                   SECTION COMMON
+                ============================ */
+        .section {
+            padding: 64px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .section-header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .section-header h2 span {
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-header .see-all {
+            color: var(--gray);
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .section-header .see-all:hover {
+            color: var(--orange);
+        }
+
+        /* ============================
+                   CATEGORIES
+                ============================ */
+        .categories {
+            padding: 0 24px 32px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .categories-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 8px 0 16px;
+            scrollbar-width: none;
+        }
+        .categories-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .category-item {
+            flex: 0 0 auto;
+            padding: 10px 22px;
+            border-radius: 50px;
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--light-gray);
+            transition: var(--transition);
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-item:hover,
+        .category-item.active {
+            background: rgba(255, 107, 0, 0.12);
+            border-color: var(--orange);
+            color: var(--white);
+            box-shadow: 0 0 30px var(--orange-glow);
+        }
+        .category-item .icon {
+            font-size: 16px;
+        }
+
+        /* ============================
+                   FLASH SALE
+                ============================ */
+        .flash-sale {
+            background: var(--dark);
+            padding: 48px 24px;
+        }
+        .flash-sale .section {
+            padding: 0;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .flash-sale-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .flash-sale-top h2 {
+            font-size: 26px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .flash-sale-top h2 span {
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flash-sale-top .countdown {
+            display: flex;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 20px;
+            background: var(--black);
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+        .flash-sale-top .countdown .time-block {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .flash-sale-top .countdown .time-block span {
+            background: var(--dark3);
+            padding: 4px 10px;
+            border-radius: 6px;
+            min-width: 32px;
+            text-align: center;
+            color: var(--gold);
+        }
+        .flash-sale-top .countdown .sep {
+            color: var(--gray);
+        }
+
+        .flash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .flash-card {
+            background: var(--dark2);
+            border-radius: var(--radius);
+            padding: 16px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .flash-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 48px rgba(255, 107, 0, 0.12);
+        }
+        .flash-card .badge-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .flash-card .badge-group .badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-limited {
+            background: #dc3545;
+            color: #fff;
+        }
+        .badge-bestseller {
+            background: var(--orange);
+            color: #fff;
+        }
+        .badge-instant {
+            background: #0d6efd;
+            color: #fff;
+        }
+        .badge-discount {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .flash-card .card-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: var(--radius-sm);
+            background: var(--dark3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        .flash-card .card-name {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        .flash-card .card-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .flash-card .card-price .original {
+            color: var(--gray);
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+        .flash-card .card-price .promo {
+            color: var(--orange);
+            font-weight: 800;
+            font-size: 18px;
+        }
+        .flash-card .stock-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--dark3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .flash-card .stock-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--orange), var(--gold));
+            transition: width 0.6s ease;
+        }
+        .flash-card .stock-text {
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* ============================
+                   GAME LIST
+                ============================ */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 18px;
+        }
+
+        .game-card {
+            background: var(--dark2);
+            border-radius: var(--radius);
+            padding: 18px 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            padding: 1px;
+            background: linear-gradient(135deg, transparent, var(--orange), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .game-card:hover::before {
+            opacity: 1;
+        }
+        .game-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--orange);
+            box-shadow: 0 12px 48px rgba(255, 107, 0, 0.10);
+        }
+        .game-card .game-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .game-card .game-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        .game-card .game-publisher {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        .game-card .glow {
+            position: absolute;
+            inset: -50%;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.08), transparent 70%);
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+        .game-card:hover .glow {
+            opacity: 1;
+        }
+
+        /* ============================
+                   TOP UP PAGE
+                ============================ */
+        #topup-page {
+            padding-top: calc(var(--navbar-height) + 40px);
+            padding-bottom: 60px;
+            min-height: 100vh;
+        }
+        .topup-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .topup-container h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .topup-container .sub {
+            color: var(--gray);
+            margin-bottom: 28px;
+        }
+
+        .topup-step {
+            background: var(--dark2);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .topup-step:focus-within {
+            border-color: var(--orange);
+            box-shadow: 0 0 30px var(--orange-glow);
+        }
+        .topup-step label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--light-gray);
+            margin-bottom: 6px;
+        }
+        .topup-step input,
+        .topup-step select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--black);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--white);
+            font-size: 14px;
+            font-family: var(--font);
+            transition: var(--transition);
+            outline: none;
+        }
+        .topup-step input:focus,
+        .topup-step select:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 20px var(--orange-glow);
+        }
+        .topup-step input::placeholder {
+            color: var(--gray);
+        }
+        .topup-step select option {
+            background: var(--dark);
+        }
+
+        .nominal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+        }
+        .nominal-btn {
+            padding: 10px 0;
+            border-radius: var(--radius-sm);
+            background: var(--black);
+            border: 1px solid var(--border);
+            color: var(--light-gray);
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+        }
+        .nominal-btn:hover {
+            border-color: var(--orange);
+            color: var(--white);
+        }
+        .nominal-btn.active {
+            border-color: var(--orange);
+            background: rgba(255, 107, 0, 0.12);
+            color: var(--orange);
+            box-shadow: 0 0 30px var(--orange-glow);
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--black);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            border: 1px solid var(--border);
+            width: fit-content;
+        }
+        .quantity-control button {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: var(--dark3);
+            color: var(--white);
+            font-size: 18px;
+            border: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .quantity-control button:hover {
+            background: var(--orange);
+        }
+        .quantity-control span {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .topup-summary {
+            background: var(--dark);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            border: 1px solid var(--border);
+            margin: 20px 0;
+        }
+        .topup-summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .topup-summary .row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 18px;
+            padding-top: 10px;
+            margin-top: 6px;
+            border-top: 1px solid var(--border);
+        }
+        .topup-summary .row .label {
+            color: var(--gray);
+        }
+        .topup-summary .row .value {
+            color: var(--white);
+        }
+        .topup-summary .row .value.orange {
+            color: var(--orange);
+        }
+
+        .btn-order {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--orange), #e65c00);
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 32px var(--orange-glow);
+            margin-top: 8px;
+        }
+        .btn-order:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 48px var(--orange-glow);
+        }
+
+        /* ============================
+                   FOOTER
+                ============================ */
+        .footer {
+            background: var(--dark);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 24px;
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 32px;
+        }
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .footer-col a,
+        .footer-col p {
+            display: block;
+            color: var(--gray);
+            font-size: 13px;
+            padding: 4px 0;
+            transition: var(--transition);
+        }
+        .footer-col a:hover {
+            color: var(--orange);
+        }
+        .footer-col .social {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .footer-col .social a {
+            font-size: 20px;
+            padding: 0;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 32px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--gray);
+        }
+        .footer-bottom strong {
+            color: var(--orange);
+        }
+
+        /* ============================
+                   RESPONSIVE
+                ============================ */
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .mobile-menu {
+                display: none;
+            }
+            .mobile-menu.open {
+                display: flex;
+            }
+            .hero-slide {
+                padding: 32px 28px;
+                min-height: 260px;
+            }
+            .hero-slide-image {
+                flex: 0 0 80px;
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-search input {
+                width: 90px;
+            }
+            .nav-search {
+                padding: 0 10px;
+            }
+            .hero-slide {
+                padding: 24px 20px;
+                min-height: 220px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero-slide-image {
+                align-self: flex-end;
+                flex: 0 0 auto;
+            }
+            .hero-slide-text h2 {
+                font-size: 28px;
+            }
+            .flash-sale-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .flash-sale-top .countdown {
+                font-size: 16px;
+                padding: 6px 14px;
+            }
+            .flash-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            .game-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+            .section {
+                padding: 40px 16px;
+            }
+            .topup-step {
+                padding: 16px 18px;
+            }
+            .nominal-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-logo {
+                font-size: 18px;
+            }
+            .nav-search input {
+                width: 60px;
+                font-size: 12px;
+            }
+            .hero-slide {
+                padding: 18px 16px;
+                min-height: 180px;
+            }
+            .hero-slide-text h2 {
+                font-size: 22px;
+            }
+            .hero-slide-text p {
+                font-size: 13px;
+            }
+            .btn-primary,
+            .btn-secondary {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+            .flash-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            .game-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            .game-card .game-icon {
+                font-size: 30px;
+            }
+            .game-card .game-name {
+                font-size: 12px;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+            #floating-wa {
+                width: 50px;
+                height: 50px;
+                font-size: 26px;
+                bottom: 20px;
+                right: 16px;
+            }
+            #back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+                bottom: 80px;
+                right: 16px;
+            }
+        }
+
+        /* ============================
+                   SKELETON LOADING (placeholder)
+                ============================ */
+        .skeleton {
+            background: linear-gradient(90deg, var(--dark2) 25%, var(--dark3) 50%, var(--dark2) 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
+        }
+        @keyframes skeletonShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* ============================
+                   RIPPLE BUTTON
+                ============================ */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: rippleAnim 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ============================
+                   SCROLL ANIMATIONS
+                ============================ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+        /* ============================
+                   DARK THEME TOGGLE (light mode placeholder)
+                ============================ */
+        body.light {
+            --black: #f5f5f5;
+            --dark: #ffffff;
+            --dark2: #f0f0f0;
+            --dark3: #e8e8e8;
+            --dark4: #dddddd;
+            --white: #111111;
+            --gray: #666666;
+            --light-gray: #555555;
+            --border: #cccccc;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        /* Not fully implemented – kept as a toggle for demo */
+
+        /* Utility */
+        .text-glow {
+            text-shadow: 0 0 40px var(--orange-glow);
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    LOADING SCREEN
+    ============================================================ -->
+    <div id="loading-screen" role="status" aria-label="Loading">
+        <div class="loading-container">
+            <div class="loading-glow-ring"></div>
+            <div class="lightning-bolts">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="loading-logo">
+                ⚡ ATHA STORE
+                <small>PREMIUM TOP UP</small>
+            </div>
+            <div class="loading-progress-wrap">
+                <div class="loading-progress-bar" id="progress-bar" style="width:0%;"></div>
+            </div>
+            <div class="loading-progress-text" id="progress-text">0%</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    NAVBAR
+    ============================================================ -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-inner">
+            <a href="#" class="nav-logo">
+                ⚡ ATHA STORE
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="#" class="active">Beranda</a></li>
+                <li><a href="#games">Semua Game</a></li>
+                <li><a href="#topup">Voucher</a></li>
+                <li><a href="#topup">Membership</a></li>
+                <li><a href="#flash">Promo</a></li>
+                <li><a href="#footer">Bantuan</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="nav-search">
+                    <input type="text" placeholder="Cari game..." aria-label="Cari game" />
+                    <button aria-label="Cari">🔍</button>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle tema">🌙</button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+        <a href="#" class="active">Beranda</a>
+        <a href="#games">Semua Game</a>
+        <a href="#topup">Voucher</a>
+        <a href="#topup">Membership</a>
+        <a href="#flash">Promo</a>
+        <a href="#footer">Bantuan</a>
+    </div>
+
+    <!-- ============================================================
+    HERO BANNER
+    ============================================================ -->
+    <section class="hero" id="hero" aria-label="Hero banner">
+        <div class="hero-bg"></div>
+        <div class="hero-lightning">
+            <span class="bolt"></span><span class="bolt"></span>
+            <span class="bolt"></span><span class="bolt"></span>
+            <span class="bolt"></span>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-slider" id="heroSlider">
+                <!-- Slide 1 -->
+                <div class="hero-slide" data-index="0">
+                    <div class="hero-slide-text">
+                        <span class="badge">⚡ FLASH SALE</span>
+                        <h2>Top Up <span>Lebih Hemat</span></h2>
+                        <p>Dapatkan diskon hingga 50% untuk semua game favoritmu. Periode terbatas!</p>
+                        <div class="btn-group">
+                            <button class="btn-primary ripple" onclick="window.location.href='#topup'">Top Up Sekarang</button>
+                            <button class="btn-secondary" onclick="window.location.href='#flash'">Lihat Promo</button>
+                        </div>
+                    </div>
+                    <div class="hero-slide-image">⚡</div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide" data-index="1">
+                    <div class="hero-slide-text">
+                        <span class="badge">🎮 PREMIUM</span>
+                        <h2>Membership <span>Eksklusif</span></h2>
+                        <p>Nikmati benefit spesial dengan membership ATHA STORE. Cashback &amp; diskon setiap hari!</p>
+                        <div class="btn-group">
+                            <button class="btn-primary ripple" onclick="window.location.href='#topup'">Lihat Membership</button>
+                        </div>
+                    </div>
+                    <div class="hero-slide-image">👑</div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="hero-slide" data-index="2">
+                    <div class="hero-slide-text">
+                        <span class="badge">💰 CASHBACK</span>
+                        <h2>Cashback <span>10%</span></h2>
+                        <p>Setiap top up minimal Rp50.000 dapat cashback langsung ke saldo ATHA STORE.</p>
+                        <div class="btn-group">
+                            <button class="btn-primary ripple" onclick="window.location.href='#topup'">Top Up Sekarang</button>
+                        </div>
+                    </div>
+                    <div class="hero-slide-image">💸</div>
+                </div>
+            </div>
+
+            <div class="hero-dots" id="heroDots" role="tablist">
+                <button role="tab" data-index="0" class="active" aria-label="Slide 1"></button>
+                <button role="tab" data-index="1" aria-label="Slide 2"></button>
+                <button role="tab" data-index="2" aria-label="Slide 3"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CATEGORIES
+    ============================================================ -->
+    <div class="categories" id="categories" aria-label="Kategori">
+        <div class="categories-scroll">
+            <button class="category-item active"><span class="icon">🔥</span> Populer</button>
+            <button class="category-item"><span class="icon">🎮</span> Game</button>
+            <button class="category-item"><span class="icon">💳</span> Voucher</button>
+            <button class="category-item"><span class="icon">💎</span> Membership</button>
+            <button class="category-item"><span class="icon">⚡</span> Flash Sale</button>
+            <button class="category-item"><span class="icon">🏆</span> Best Seller</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLASH SALE
+    ============================================================ -->
+    <section class="flash-sale" id="flash" aria-label="Flash sale">
+        <div class="section">
+            <div class="flash-sale-top">
+                <h2>⚡ <span>Flash Sale</span></h2>
+                <div class="countdown" id="countdown">
+                    <div class="time-block"><span id="cd-hours">00</span><span class="sep">:</span></div>
+                    <div class="time-block"><span id="cd-minutes">00</span><span class="sep">:</span></div>
+                    <div class="time-block"><span id="cd-seconds">00</span></div>
+                </div>
+            </div>
+
+            <div class="flash-grid" id="flashGrid">
+                <!-- Cards will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    GAME LIST
+    ============================================================ -->
+    <section class="section" id="games" aria-label="Daftar game">
+        <div class="section-header">
+            <h2>🎮 <span>Semua Game</span></h2>
+            <span class="see-all">Lihat Semua →</span>
+        </div>
+        <div class="game-grid" id="gameGrid">
+            <!-- Injected by JS -->
+        </div>
+    </section>
+
+    <!-- ============================================================
+    TOP UP PAGE
+    ============================================================ -->
+    <section id="topup" aria-label="Halaman Top Up">
+        <div class="topup-container">
+            <h1>⚡ Top Up Game</h1>
+            <p class="sub">Isi data dengan benar untuk proses cepat.</p>
+
+            <!-- Step 1: ID Game -->
+            <div class="topup-step">
+                <label for="gameId">1. ID Game</label>
+                <input type="text" id="gameId" placeholder="Masukkan ID Game (contoh: 12345678)" />
+            </div>
+
+            <!-- Step 2: Server -->
+            <div class="topup-step">
+                <label for="serverSelect">2. Pilih Server</label>
+                <select id="serverSelect">
+                    <option value="">Pilih Server</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Global">Global</option>
+                </select>
+            </div>
+
+            <!-- Step 3: Nominal -->
+            <div class="topup-step">
+                <label>3. Pilih Nominal</label>
+                <div class="nominal-grid" id="nominalGrid">
+                    <button class="nominal-btn" data-value="10000">Rp 10K</button>
+                    <button class="nominal-btn" data-value="25000">Rp 25K</button>
+                    <button class="nominal-btn active" data-value="50000">Rp 50K</button>
+                    <button class="nominal-btn" data-value="100000">Rp 100K</button>
+                    <button class="nominal-btn" data-value="200000">Rp 200K</button>
+                    <button class="nominal-btn" data-value="500000">Rp 500K</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Jumlah -->
+            <div class="topup-step">
+                <label>4. Jumlah</label>
+                <div class="quantity-control">
+                    <button id="qtyMinus">−</button>
+                    <span id="qtyDisplay">1</span>
+                    <button id="qtyPlus">+</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Email -->
+            <div class="topup-step">
+                <label for="emailInput">5. Email (Opsional)</label>
+                <input type="email" id="emailInput" placeholder="Masukkan email untuk konfirmasi" />
+            </div>
+
+            <!-- Step 6: WhatsApp -->
+            <div class="topup-step">
+                <label for="waInput">6. Nomor WhatsApp <span style="color:var(--orange);">*</span></label>
+                <input type="tel" id="waInput" placeholder="08xxxxxxxxxx" required />
+            </div>
+
+            <!-- Step 7: Kode Promo -->
+            <div class="topup-step">
+                <label for="promoInput">7. Kode Promo (Opsional)</label>
+                <input type="text" id="promoInput" placeholder="Masukkan kode promo" />
+            </div>
+
+            <!-- Summary -->
+            <div class="topup-summary" id="orderSummary">
+                <div class="row"><span class="label">Game</span><span class="value" id="summaryGame">—</span></div>
+                <div class="row"><span class="label">ID Game</span><span class="value" id="summaryId">—</span></div>
+                <div class="row"><span class="label">Server</span><span class="value" id="summaryServer">—</span></div>
+                <div class="row"><span class="label">Nominal</span><span class="value" id="summaryNominal">Rp 50.000</span></div>
+                <div class="row"><span class="label">Jumlah</span><span class="value" id="summaryQty">1</span></div>
+                <div class="row"><span class="label">Email</span><span class="value" id="summaryEmail">—</span></div>
+                <div class="row"><span class="label">WhatsApp</span><span class="value" id="summaryWa">—</span></div>
+                <div class="row"><span class="label">Kode Promo</span><span class="value" id="summaryPromo">—</span></div>
+                <div class="row"><span class="label">Total</span><span class="value orange" id="summaryTotal">Rp 50.000</span></div>
+            </div>
+
+            <button class="btn-order ripple" id="orderBtn">📱 Pesan Sekarang via WhatsApp</button>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>⚡ ATHA STORE</h4>
+                <p>Platform top up game premium terbaik. Cepat, murah, dan terpercaya.</p>
+                <div class="social">
+                    <a href="https://instagram.com/atha_store01" target="_blank" aria-label="Instagram">📸</a>
+                    <a href="https://wa.me/628817055190" target="_blank" aria-label="WhatsApp">💬</a>
+                    <a href="mailto:athastore150@gmail.com" aria-label="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Informasi</h4>
+                <a href="#">Tentang Kami</a>
+                <a href="#">Cara Top Up</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#">Syarat &amp; Ketentuan</a>
+                <a href="#">Kebijakan Privasi</a>
+            </div>
+            <div class="footer-col">
+                <h4>Kontak</h4>
+                <a href="https://wa.me/628817055190">+62 881-7055-190</a>
+                <a href="mailto:athastore150@gmail.com">athastore150@gmail.com</a>
+                <a href="https://instagram.com/atha_store01">@atha_store01</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 <strong>ATHA STORE</strong>. All rights reserved. Made with ⚡
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    BACK TO TOP
+    ============================================================ -->
+    <button id="back-to-top" aria-label="Kembali ke atas">↑</button>
+
+    <!-- ============================================================
+    FLOATING WHATSAPP
+    ============================================================ -->
+    <a href="https://wa.me/628817055190" target="_blank" id="floating-wa" aria-label="Hubungi via WhatsApp">
+        💬
+    </a>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ==========================================================
+            // 1. LOADING SCREEN
+            // ==========================================================
+            const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            let progress = 0;
+            const loadInterval = setInterval(() => {
+                progress += Math.random() * 8 + 2;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = Math.round(progress) + '%';
+                if (progress >= 100) {
+                    clearInterval(loadInterval);
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                        // Trigger scroll animations
+                        observeSections();
+                    }, 400);
+                }
+            }, 120);
+
+            // ==========================================================
+            // 2. NAVBAR SCROLL & HAMBURGER
+            // ==========================================================
+            const navbar = document.getElementById('navbar');
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            hamburger.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.toggle('open');
+                hamburger.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isOpen);
+            });
+
+            // Close mobile menu on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // ==========================================================
+            // 3. HERO SLIDER
+            // ==========================================================
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('#heroDots button');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function goToSlide(index) {
+                slides.forEach((s, i) => {
+                    s.style.display = i === index ? 'flex' : 'none';
+                });
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                goToSlide((currentSlide + 1) % slides.length);
+            }
+
+            // Init: show first slide
+            goToSlide(0);
+
+            // Dot clicks
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.index);
+                    goToSlide(idx);
+                    resetSlideTimer();
+                });
+            });
+
+            function resetSlideTimer() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            resetSlideTimer();
+
+            // ==========================================================
+            // 4. FLASH SALE DATA & RENDER
+            // ==========================================================
+            const flashProducts = [{
+                id: 1,
+                name: 'Diamond ML',
+                icon: '💎',
+                originalPrice: 100000,
+                promoPrice: 75000,
+                discount: 25,
+                stock: 42,
+                badges: ['Limited', 'Best Seller']
+            }, {
+                id: 2,
+                name: 'UC Free Fire',
+                icon: '🔥',
+                originalPrice: 50000,
+                promoPrice: 35000,
+                discount: 30,
+                stock: 28,
+                badges: ['Flash Sale', 'Instant']
+            }, {
+                id: 3,
+                name: 'PUBG UC',
+                icon: '🎯',
+                originalPrice: 150000,
+                promoPrice: 105000,
+                discount: 30,
+                stock: 15,
+                badges: ['Best Seller']
+            }, {
+                id: 4,
+                name: 'Valorant VP',
+                icon: '🔫',
+                originalPrice: 200000,
+                promoPrice: 160000,
+                discount: 20,
+                stock: 8,
+                badges: ['Limited']
+            }, {
+                id: 5,
+                name: 'Honor of Kings',
+                icon: '👑',
+                originalPrice: 75000,
+                promoPrice: 55000,
+                discount: 27,
+                stock: 34,
+                badges: ['New']
+            }, {
+                id: 6,
+                name: 'Roblox Robux',
+                icon: '🧱',
+                originalPrice: 120000,
+                promoPrice: 90000,
+                discount: 25,
+                stock: 19,
+                badges: ['Instant']
+            }, ];
+
+            const flashGrid = document.getElementById('flashGrid');
+
+            function renderFlash() {
+                flashGrid.innerHTML = flashProducts.map(p => {
+                    const stockPercent = Math.round((p.stock / 50) * 100);
+                    const badgeHTML = p.badges.map(b => {
+                        let cls = 'badge';
+                        if (b === 'Limited') cls += ' badge-limited';
+                        else if (b === 'Best Seller') cls += ' badge-bestseller';
+                        else if (b === 'Instant') cls += ' badge-instant';
+                        else if (b === 'Flash Sale') cls += ' badge-discount';
+                        else cls += ' badge-discount';
+                        return `<span class="${cls}">${b}</span>`;
+                    }).join('');
+
+                    return `
+                        <div class="flash-card fade-up">
+                            <div class="badge-group">${badgeHTML}</div>
+                            <div class="card-img">${p.icon}</div>
+                            <div class="card-name">${p.name}</div>
+                            <div class="card-price">
+                                <span class="original">Rp ${p.originalPrice.toLocaleString()}</span>
+                                <span class="promo">Rp ${p.promoPrice.toLocaleString()}</span>
+                            </div>
+                            <div class="stock-bar"><div class="fill" style="width:${stockPercent}%;"></div></div>
+                            <div class="stock-text">Stok: ${p.stock} tersisa</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            renderFlash();
+
+            // ==========================================================
+            // 5. COUNTDOWN (2 hours from now)
+            // ==========================================================
+            let countdownEnd = new Date();
+            countdownEnd.setHours(countdownEnd.getHours() + 2);
+
+            function updateCountdown() {
+                const now = new Date();
+                let diff = Math.floor((countdownEnd - now) / 1000);
+                if (diff < 0) {
+                    // Reset to 2 hours
+                    countdownEnd = new Date();
+                    countdownEnd.setHours(countdownEnd.getHours() + 2);
+                    diff = 7200;
+                }
+                const h = String(Math.floor(diff / 3600)).padStart(2, '0');
+                const m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+                const s = String(diff % 60).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = h;
+                document.getElementById('cd-minutes').textContent = m;
+                document.getElementById('cd-seconds').textContent = s;
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // ==========================================================
+            // 6. GAME LIST DATA & RENDER
+            // ==========================================================
+            const games = [
+                { name: 'Mobile Legends', icon: '⚔️', publisher: 'Moonton' },
+                { name: 'Free Fire', icon: '🔥', publisher: 'Garena' },
+                { name: 'PUBG Mobile', icon: '🎯', publisher: 'KRAFTON' },
+                { name: 'Valorant', icon: '🔫', publisher: 'Riot Games' },
+                { name: 'Honor of Kings', icon: '👑', publisher: 'Tencent' },
+                { name: 'Blood Strike', icon: '🩸', publisher: 'NetEase' },
+                { name: 'Roblox', icon: '🧱', publisher: 'Roblox Corp' },
+                { name: 'COD Mobile', icon: '🎖️', publisher: 'Activision' },
+                { name: 'Delta Force', icon: '⚡', publisher: 'TiMi' },
+                { name: 'Magic Chess', icon: '♟️', publisher: 'Moonton' },
+                { name: 'Point Blank', icon: '💥', publisher: 'Zepetto' },
+                { name: 'Steam', icon: '🎮', publisher: 'Valve' },
+                { name: 'Token Listrik', icon: '💡', publisher: 'PLN' },
+                { name: 'TikTok Coin', icon: '📱', publisher: 'TikTok' },
+                { name: 'Google Play', icon: '▶️', publisher: 'Google' },
+            ];
+
+            const gameGrid = document.getElementById('gameGrid');
+
+            function renderGames() {
+                gameGrid.innerHTML = games.map(g => `
+                    <div class="game-card fade-up" onclick="window.location.href='#topup'">
+                        <span class="game-icon">${g.icon}</span>
+                        <div class="game-name">${g.name}</div>
+                        <div class="game-publisher">${g.publisher}</div>
+                        <div class="glow"></div>
+                    </div>
+                `).join('');
+            }
+            renderGames();
+
+            // ==========================================================
+            // 7. TOP UP LOGIC
+            // ==========================================================
+            // Nominal selection
+            const nominalBtns = document.querySelectorAll('.nominal-btn');
+            let selectedNominal = 50000;
+            let quantity = 1;
+
+            nominalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    nominalBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedNominal = parseInt(btn.dataset.value);
+                    updateSummary();
+                });
+            });
+
+            // Quantity
+            const qtyDisplay = document.getElementById('qtyDisplay');
+            document.getElementById('qtyMinus').addEventListener('click', () => {
+                if (quantity > 1) {
+                    quantity--;
+                    qtyDisplay.textContent = quantity;
+                    updateSummary();
+                }
+            });
+            document.getElementById('qtyPlus').addEventListener('click', () => {
+                if (quantity < 99) {
+                    quantity++;
+                    qtyDisplay.textContent = quantity;
+                    updateSummary();
+                }
+            });
+
+            // Inputs
+            const gameIdInput = document.getElementById('gameId');
+            const serverSelect = document.getElementById('serverSelect');
+            const emailInput = document.getElementById('emailInput');
+            const waInput = document.getElementById('waInput');
+            const promoInput = document.getElementById('promoInput');
+
+            [gameIdInput, serverSelect, emailInput, waInput, promoInput].forEach(el => {
+                el.addEventListener('input', updateSummary);
+                el.addEventListener('change', updateSummary);
+            });
+
+            function updateSummary() {
+                const nominal = selectedNominal;
+                const total = nominal * quantity;
+
+                document.getElementById('summaryGame').textContent = 'Mobile Legends'; // static demo
+                document.getElementById('summaryId').textContent = gameIdInput.value || '—';
+                document.getElementById('summaryServer').textContent = serverSelect.value || '—';
+                document.getElementById('summaryNominal').textContent = 'Rp ' + nominal.toLocaleString();
+                document.getElementById('summaryQty').textContent = quantity;
+                document.getElementById('summaryEmail').textContent = emailInput.value || '—';
+                document.getElementById('summaryWa').textContent = waInput.value || '—';
+                document.getElementById('summaryPromo').textContent = promoInput.value || '—';
+                document.getElementById('summaryTotal').textContent = 'Rp ' + total.toLocaleString();
+            }
+            updateSummary();
+
+            // ==========================================================
+            // 8. ORDER BUTTON → WHATSAPP
+            // ==========================================================
+            const orderBtn = document.getElementById('orderBtn');
+            const adminPhone = '628817055190';
+
+            orderBtn.addEventListener('click', function() {
+                const game = 'Mobile Legends';
+                const id = gameIdInput.value.trim() || '(belum diisi)';
+                const server = serverSelect.value || '(belum diisi)';
+                const nominal = 'Rp ' + selectedNominal.toLocaleString();
+                const qty = quantity;
+                const total = 'Rp ' + (selectedNominal * quantity).toLocaleString();
+                const email = emailInput.value.trim() || '(tidak diisi)';
+                const wa = waInput.value.trim() || '(belum diisi)';
+                const promo = promoInput.value.trim() || '(tidak pakai)';
+                const time = new Date().toLocaleString('id-ID');
+
+                if (!waInput.value.trim()) {
+                    alert('⚠️ Harap isi nomor WhatsApp terlebih dahulu.');
+                    waInput.focus();
+                    return;
+                }
+
+                const message =
+                    `======================\n` +
+                    `ATHA STORE\n` +
+                    `PESANAN BARU\n` +
+                    `======================\n` +
+                    `Game: ${game}\n` +
+                    `ID: ${id}\n` +
+                    `Server: ${server}\n` +
+                    `Nominal: ${nominal}\n` +
+                    `Jumlah: ${qty}\n` +
+                    `Total: ${total}\n` +
+                    `Email: ${email}\n` +
+                    `WhatsApp: ${wa}\n` +
+                    `Kode Promo: ${promo}\n` +
+                    `Waktu: ${time}\n` +
+                    `======================`;
+
+                const encoded = encodeURIComponent(message);
+                const waUrl = `https://wa.me/${adminPhone}?text=${encoded}`;
+                window.open(waUrl, '_blank');
+            });
+
+            // ==========================================================
+            // 9. SCROLL ANIMATIONS (Intersection Observer)
+            // ==========================================================
+            function observeSections() {
+                const elements = document.querySelectorAll('.fade-up, .fade-in');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+
+                elements.forEach(el => observer.observe(el));
+            }
+
+            // Also observe flash cards & game cards after they render
+            setTimeout(observeSections, 600);
+
+            // ==========================================================
+            // 10. BACK TO TOP
+            // ==========================================================
+            const backBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 600) {
+                    backBtn.classList.add('visible');
+                } else {
+                    backBtn.classList.remove('visible');
+                }
+            });
+            backBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ==========================================================
+            // 11. RIPPLE EFFECT
+            // ==========================================================
+            document.querySelectorAll('.ripple').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple-effect';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.width = ripple.style.height = '20px';
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // ==========================================================
+            // 12. THEME TOGGLE (light/dark)
+            // ==========================================================
+            const themeToggle = document.getElementById('themeToggle');
+            let isLight = false;
+            themeToggle.addEventListener('click', () => {
+                isLight = !isLight;
+                document.body.classList.toggle('light', isLight);
+                themeToggle.textContent = isLight ? '☀️' : '🌙';
+            });
+
+            // ==========================================================
+            // 13. CATEGORY CLICK
+            // ==========================================================
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    // Scroll to games section
+                    document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // ==========================================================
+            // 14. NAV MENU ACTIVE LINK
+            // ==========================================================
+            document.querySelectorAll('.nav-menu a, .mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-menu a, .mobile-menu a').forEach(l => l.classList.remove(
+                    'active'));
+                    this.classList.add('active');
+                });
+            });
+
+            console.log('⚡ ATHA STORE loaded successfully!');
+        });
+    </script>
+
+</body>
+</html>
